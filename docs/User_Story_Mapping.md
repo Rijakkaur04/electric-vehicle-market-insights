@@ -141,3 +141,4 @@
   * *User Story:* As a Student Intern, I want a Git repository with README, badges, quickstart instructions, and links to submit on MySkillWallet.
   * *Acceptance Criteria:* Git initialized, clean commit history, README with scenario walkthroughs, demo hosting guide.
   * *Artifact:* `.git/`, `README.md`, `run_app.bat`
+

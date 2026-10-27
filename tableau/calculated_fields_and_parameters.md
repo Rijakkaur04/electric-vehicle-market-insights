@@ -128,3 +128,4 @@ This document outlines all calculated fields, Level of Detail (LOD) expressions,
 * **Current Value:** `5`
 * **Allowable Values:** Range from `3` to `15` (Step: `1`)
 * **Purpose:** Dynamic filtering of leaderboard charts to prevent visual clutter.
+

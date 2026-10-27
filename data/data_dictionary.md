@@ -50,3 +50,4 @@ This data dictionary provides comprehensive metadata, column descriptions, data 
 | **`Avg_Price_USD`** | Float | Mean vehicle price tag across vehicles in this chemistry group. |
 | **`Avg_Fast_Charge_mins`** | Float | Mean DC fast charge duration. |
 | **`Avg_Customer_Rating`** | Float | Mean customer satisfaction rating. |
+

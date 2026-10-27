@@ -11,6 +11,7 @@
 ---
 
 ## 📌 Submission Overview & Quick Links
+* **GitHub Repository:** [https://github.com/Rijakkaur04/electric-vehicle-market-insights](https://github.com/Rijakkaur04/electric-vehicle-market-insights)
 * **Capstone Platform:** [MySkillWallet.ai](https://myskillwallet.ai) (Powered by SmartBridge / SmartInternz)
 * **Program:** Data Analytics with Tableau
 * **Project Module:** `data-analytics-with-tableau-6abcef62500f0d3aeede46d5`
@@ -176,11 +177,11 @@ To submit your project to your mentor on [MySkillWallet](https://myskillwallet.a
    * Create a new repository on your GitHub account (e.g. `electric-vehicle-market-insights`).
    * Push this repository to GitHub:
      ```bash
-     git remote add origin https://github.com/<your-username>/electric-vehicle-market-insights.git
+     git remote add origin https://github.com/Rijakkaur04/electric-vehicle-market-insights.git
      git branch -M main
      git push -u origin main
      ```
-   * Copy your GitHub repository URL: `https://github.com/<your-username>/electric-vehicle-market-insights`
+   * Copy your GitHub repository URL: `https://github.com/Rijakkaur04/electric-vehicle-market-insights`
    * Click **"Add Github Link"** on your MySkillWallet project page and paste the link.
 
 2. **Demo Link:**
@@ -193,3 +194,4 @@ To submit your project to your mentor on [MySkillWallet](https://myskillwallet.a
 
 ## 📄 License
 This project is licensed under the MIT License — see the LICENSE file for details.
+

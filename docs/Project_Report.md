@@ -147,3 +147,4 @@ Crafted a 5-point Tableau Story (`Story - EV Market Transformation`) leading vie
 | **Performance Benchmark Suite & Report** | `performance_testing/benchmark_tests.py`, `Performance_Testing_Report.md` |
 | **Architecture & User Story Mapping** | `docs/Architecture_and_Workflow.md`, `docs/User_Story_Mapping.md` |
 | **GitHub Repository & One-Click Runner** | `README.md`, `run_app.bat`, `.git/` |
+

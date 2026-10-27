@@ -115,3 +115,4 @@ The analytical warehouse organizes vehicle specifications and performance metric
 2. **Range vs Capacity Efficiency:** Studies scatter plot regressions comparing battery pack size to effective driving range.
 3. **Decarbonization ROI:** Calculates lifecycle carbon offset across private passenger cars vs municipal transit buses.
 4. **Action:** Publishes clean transportation policy briefs highlighting commercial fleet electrification as the highest ROI carbon mitigation strategy.
+
