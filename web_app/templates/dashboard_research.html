@@ -1,0 +1,181 @@
+{% extends "base.html" %}
+
+{% block title %}Sustainable Mobility Research | Dr. Sarah Williams{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <div class="header-title">
+    <div class="persona-tag" style="background: rgba(139, 92, 246, 0.12); color: #8b5cf6; border-color: rgba(139, 92, 246, 0.3);">
+      <span>🔬</span> Scenario 3: Sustainable Mobility &amp; Battery Tech Innovation
+    </div>
+    <h2>Sustainable Mobility Research Dashboard</h2>
+    <p>Target Stakeholder: <strong>Dr. Sarah Williams</strong> — Battery Chemistry Disruption, Energy Efficiency &amp; Decarbonization</p>
+  </div>
+  <div>
+    <span class="chart-badge" style="background: rgba(139, 92, 246, 0.2); color: #8b5cf6; font-size: 0.85rem; padding: 0.4rem 0.8rem;">
+      Clean Tech Lab View
+    </span>
+  </div>
+</div>
+
+<!-- Research KPI Grid -->
+<div class="kpi-grid">
+  <div class="kpi-card">
+    <div class="kpi-header">
+      <span class="kpi-title">Next-Gen Solid-State Range</span>
+      <div class="kpi-icon" style="background: rgba(139, 92, 246, 0.15); color: #8b5cf6;">⚡</div>
+    </div>
+    <div class="kpi-value">850 - 1000 km</div>
+    <div class="kpi-subtext">+65% vs standard NMC chemistries</div>
+  </div>
+
+  <div class="kpi-card">
+    <div class="kpi-header">
+      <span class="kpi-title">Mean Range Efficiency</span>
+      <div class="kpi-icon" style="background: rgba(6, 182, 212, 0.15); color: #06b6d4;">🔋</div>
+    </div>
+    <div class="kpi-value">6.8 km/kWh</div>
+    <div class="kpi-subtext">Across passenger vehicle categories</div>
+  </div>
+
+  <div class="kpi-card">
+    <div class="kpi-header">
+      <span class="kpi-title">Fast Charging Breakthrough</span>
+      <div class="kpi-icon" style="background: rgba(16, 185, 129, 0.15); color: #10b981;">⏱️</div>
+    </div>
+    <div class="kpi-value">15 - 20 mins</div>
+    <div class="kpi-subtext">10% - 80% SoC in 800V architectures</div>
+  </div>
+
+  <div class="kpi-card">
+    <div class="kpi-header">
+      <span class="kpi-title">Total CO2 Abatement</span>
+      <div class="kpi-icon" style="background: rgba(245, 158, 11, 0.15); color: #f59e0b;">🌱</div>
+    </div>
+    <div class="kpi-value">38.4M Tons</div>
+    <div class="kpi-subtext">Cumulative net emissions avoided</div>
+  </div>
+</div>
+
+<!-- Research Visual Charts Grid -->
+<div class="chart-grid">
+  <!-- Chart 1: Range vs Battery Capacity Scatter Plot -->
+  <div class="chart-card col-12">
+    <div class="chart-header">
+      <h3><span>🔬</span> Battery Pack Capacity (kWh) vs. Official Driving Range (km)</h3>
+      <span class="chart-badge">Segmented by Battery Chemistry</span>
+    </div>
+    <p style="color: var(--text-dim); font-size: 0.85rem; margin-bottom: 1rem;">
+      Each point represents a distinct vehicle model trim. Hover over points to examine model name, chemistry, and price tag.
+    </p>
+    <div class="chart-container" style="min-height: 420px;">
+      <canvas id="chart-range-capacity"></canvas>
+    </div>
+  </div>
+</div>
+
+<!-- Battery Chemistry Comparative Matrix -->
+<div class="chart-card" style="margin-bottom: 2rem;">
+  <div class="chart-header">
+    <h3><span>📑</span> Electrochemical Chemistry Matrix &amp; Technological Tradeoffs</h3>
+    <span class="chart-badge">Research Synthesis</span>
+  </div>
+  <div class="table-responsive">
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Battery Chemistry</th>
+          <th>Energy Density (Wh/kg)</th>
+          <th>Thermal Stability</th>
+          <th>Cycle Lifespan</th>
+          <th>Relative Cost</th>
+          <th>Primary Use Cases</th>
+          <th>Strategic Outlook</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="badge badge-lfp">LFP (Lithium Iron Phosphate)</span></td>
+          <td>160 - 200</td>
+          <td>Exceptional / Ultra-Safe</td>
+          <td>3,000 - 5,000 cycles</td>
+          <td>Low ($65-$80/kWh)</td>
+          <td>Mass Economy Sedans, SUVs, Buses</td>
+          <td>Dominating urban and commercial fleet markets worldwide.</td>
+        </tr>
+        <tr>
+          <td><span class="badge badge-nmc">NMC (Nickel Manganese Cobalt)</span></td>
+          <td>250 - 300</td>
+          <td>Moderate (Requires active BMS)</td>
+          <td>1,500 - 2,500 cycles</td>
+          <td>Medium-High ($95-$115/kWh)</td>
+          <td>Long-Range Premium Sedans &amp; SUVs</td>
+          <td>Industry standard for high performance and highway range.</td>
+        </tr>
+        <tr>
+          <td><span class="badge badge-nca">NCA (Nickel Cobalt Aluminum)</span></td>
+          <td>260 - 320</td>
+          <td>Moderate</td>
+          <td>1,200 - 2,000 cycles</td>
+          <td>High ($105-$125/kWh)</td>
+          <td>Ultra-Performance (Tesla Model S/X/Cyber)</td>
+          <td>High specific power output; gradually transitioning to high-nickel NMC.</td>
+        </tr>
+        <tr>
+          <td><span class="badge badge-solid">Solid-State (Next-Gen)</span></td>
+          <td>400 - 500+</td>
+          <td>Superior (Non-flammable electrolyte)</td>
+          <td>2,000 - 4,000 cycles</td>
+          <td>High Initial ($180+/kWh)</td>
+          <td>Ultra-Luxury Flagships (NIO, Lucid)</td>
+          <td>Commercial pilot phase (2024-2027); potential 1,000 km range unlock.</td>
+        </tr>
+        <tr>
+          <td><span class="badge badge-sodium">Sodium-Ion (Na-Ion)</span></td>
+          <td>140 - 170</td>
+          <td>Exceptional cold-temp resilience</td>
+          <td>2,500 - 4,000 cycles</td>
+          <td>Ultra-Low ($40-$55/kWh)</td>
+          <td>City Hatchbacks, Two-Wheelers</td>
+          <td>Zero lithium dependency; disruptive for budget urban mobility.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- Policy & Research Recommendations Callout -->
+<div class="insight-box" style="border-color: rgba(139, 92, 246, 0.3); background: linear-gradient(135deg, rgba(139, 92, 246, 0.08), rgba(6, 182, 212, 0.05));">
+  <div class="insight-header" style="color: var(--accent-purple);">
+    <span>📜</span> Policy &amp; Decarbonization Roadmap for Dr. Sarah Williams
+  </div>
+  <ul class="insight-list">
+    <li class="insight-item">
+      <span class="insight-bullet" style="color: var(--accent-purple);">▸</span>
+      <div>
+        <strong>Commercial Fleet Decarbonization Multiplier:</strong> One electric transit bus abates 45+ tons of CO2 annually — equivalent to taking 22 passenger cars off the road. Municipal transit subsidies yield the highest carbon ROI.
+      </div>
+    </li>
+    <li class="insight-item">
+      <span class="insight-bullet" style="color: var(--accent-purple);">▸</span>
+      <div>
+        <strong>Cold Climate Resilience:</strong> Sodium-ion batteries retain 85%+ capacity at -20°C compared to 55% for NMC/LFP, making them key for Nordic and Northern North American adoption without range degradation.
+      </div>
+    </li>
+    <li class="insight-item">
+      <span class="insight-bullet" style="color: var(--accent-purple);">▸</span>
+      <div>
+        <strong>Closed-Loop Battery Recycling:</strong> Mandating 95%+ recovery of Nickel, Cobalt, and Lithium by 2030 will decouple manufacturing expansion from raw virgin mining bottlenecks.
+      </div>
+    </li>
+  </ul>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    initResearchCharts();
+  });
+</script>
+{% endblock %}

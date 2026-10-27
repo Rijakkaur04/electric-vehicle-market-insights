@@ -1,0 +1,175 @@
+{% extends "base.html" %}
+
+{% block title %}Executive Strategy Dashboard | Emily Johnson{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <div class="header-title">
+    <div class="persona-tag">
+      <span>👔</span> Scenario 1: Executive Market Strategy Portal
+    </div>
+    <h2>EV Market Strategy Director Dashboard</h2>
+    <p>Target Stakeholder: <strong>Emily Johnson</strong> — Strategic Market Positioning & Portfolio Optimization</p>
+  </div>
+  <div>
+    <span class="chart-badge" style="background: rgba(59, 130, 246, 0.2); color: #3b82f6; font-size: 0.85rem; padding: 0.4rem 0.8rem;">
+      Executive Portfolio View
+    </span>
+  </div>
+</div>
+
+<!-- Dynamic Interactive Filter Toolbar -->
+<div class="filter-bar">
+  <div class="filter-group">
+    <label for="filter-year">Model Year:</label>
+    <select id="filter-year">
+      <option value="all">All Historical (2019 - 2025)</option>
+      <option value="2025">2025 (Forecast)</option>
+      <option value="2024" selected>2024 (Current Market)</option>
+      <option value="2023">2023</option>
+      <option value="2022">2022</option>
+      <option value="2021">2021</option>
+      <option value="2020">2020</option>
+      <option value="2019">2019</option>
+    </select>
+  </div>
+
+  <div class="filter-group">
+    <label for="filter-cat">Vehicle Category:</label>
+    <select id="filter-cat">
+      <option value="all">All Categories</option>
+      <option value="SUV">SUV</option>
+      <option value="Sedan">Sedan</option>
+      <option value="Hatchback">Hatchback</option>
+      <option value="Truck">Electric Truck</option>
+      <option value="Electric Bus">Electric Bus</option>
+      <option value="Two-wheeler">Two-Wheeler</option>
+    </select>
+  </div>
+
+  <div class="filter-group">
+    <label for="filter-region">Production Region:</label>
+    <select id="filter-region">
+      <option value="all">All Regions</option>
+      <option value="North America">North America</option>
+      <option value="Europe">Europe</option>
+      <option value="Asia-Pacific">Asia-Pacific</option>
+    </select>
+  </div>
+
+  <button class="btn-reset" onclick="document.getElementById('filter-year').value='all'; document.getElementById('filter-cat').value='all'; document.getElementById('filter-region').value='all'; refreshKPIs(); initStrategyCharts();">
+    Reset All Filters
+  </button>
+</div>
+
+<!-- Live Filter-Linked KPI Grid -->
+<div class="kpi-grid">
+  <div class="kpi-card">
+    <div class="kpi-header">
+      <span class="kpi-title">Selected Units Sold</span>
+      <div class="kpi-icon" style="background: rgba(59, 130, 246, 0.15); color: #3b82f6;">📦</div>
+    </div>
+    <div class="kpi-value" id="kpi-sales">Loading...</div>
+    <div class="kpi-subtext">Filter-responsive sales volume</div>
+  </div>
+
+  <div class="kpi-card">
+    <div class="kpi-header">
+      <span class="kpi-title">Gross Segment Revenue</span>
+      <div class="kpi-icon" style="background: rgba(16, 185, 129, 0.15); color: #10b981;">💵</div>
+    </div>
+    <div class="kpi-value" id="kpi-revenue">Loading...</div>
+    <div class="kpi-subtext">Estimated total turnover</div>
+  </div>
+
+  <div class="kpi-card">
+    <div class="kpi-header">
+      <span class="kpi-title">Mean Driving Range</span>
+      <div class="kpi-icon" style="background: rgba(6, 182, 212, 0.15); color: #06b6d4;">🧭</div>
+    </div>
+    <div class="kpi-value" id="kpi-range">Loading...</div>
+    <div class="kpi-subtext">WLTP / EPA rated kilometers</div>
+  </div>
+
+  <div class="kpi-card">
+    <div class="kpi-header">
+      <span class="kpi-title">Customer Satisfaction</span>
+      <div class="kpi-icon" style="background: rgba(245, 158, 11, 0.15); color: #f59e0b;">⭐</div>
+    </div>
+    <div class="kpi-value" id="kpi-rating">Loading...</div>
+    <div class="kpi-subtext">Average buyer rating score</div>
+  </div>
+</div>
+
+<!-- Strategy Charts Grid -->
+<div class="chart-grid">
+  <!-- Chart 1: Sales & Revenue by Category -->
+  <div class="chart-card col-6">
+    <div class="chart-header">
+      <h3><span>📊</span> Category Volume &amp; Revenue Breakdown</h3>
+      <span class="chart-badge">Dual-Axis View</span>
+    </div>
+    <div class="chart-container">
+      <canvas id="chart-category-sales"></canvas>
+    </div>
+  </div>
+
+  <!-- Chart 2: Top Manufacturers Ranking -->
+  <div class="chart-card col-6">
+    <div class="chart-header">
+      <h3><span>🏆</span> Top Manufacturer Leaderboard</h3>
+      <span class="chart-badge">Global Unit Share</span>
+    </div>
+    <div class="chart-container">
+      <canvas id="chart-oem-leaderboard"></canvas>
+    </div>
+  </div>
+
+  <!-- Chart 3: Multi-Year Trajectory -->
+  <div class="chart-card col-12">
+    <div class="chart-header">
+      <h3><span>📈</span> Annual Adoption Growth Trajectory (2019-2025)</h3>
+      <span class="chart-badge">S-Curve Growth Dynamics</span>
+    </div>
+    <div class="chart-container" style="min-height: 360px;">
+      <canvas id="chart-yearly-trajectory"></canvas>
+    </div>
+  </div>
+</div>
+
+<!-- Executive Strategy Insights Callout -->
+<div class="insight-box">
+  <div class="insight-header">
+    <span>💡</span> Executive Strategic Recommendations for Emily Johnson
+  </div>
+  <ul class="insight-list">
+    <li class="insight-item">
+      <span class="insight-bullet">▸</span>
+      <div>
+        <strong>Double Down on Mid-Size SUV Segment:</strong> SUVs represent over 44% of global EV sales revenue, driven by consumer preference for high driving height, cabin spaciousness, and dual-motor AWD capabilities.
+      </div>
+    </li>
+    <li class="insight-item">
+      <span class="insight-bullet">▸</span>
+      <div>
+        <strong>Accelerate LFP Battery Adoption in Entry Trims:</strong> Lithium Iron Phosphate (LFP) enables a 20-25% price reduction per pack with 3,000+ lifecycle charges, vital for dominating mass-market urban vehicle tiers.
+      </div>
+    </li>
+    <li class="insight-item">
+      <span class="insight-bullet">▸</span>
+      <div>
+        <strong>Counter the Dual Duopoly:</strong> Tesla and BYD control over 42% of volume. Tier-2 OEMs must differentiate on ultra-fast 800V charging architectures and premium in-cabin software ecosystems.
+      </div>
+    </li>
+  </ul>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    refreshKPIs();
+    initStrategyCharts();
+  });
+</script>
+{% endblock %}

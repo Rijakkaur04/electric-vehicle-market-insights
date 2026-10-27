@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}Electric Vehicle Market Performance & Insights{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <!-- Chart.js CDN for interactive visual analytics -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+</head>
+<body>
+
+  <!-- Top Navigation Header -->
+  <header class="navbar">
+    <a href="{{ url_for('index') }}" class="brand-container">
+      <div class="brand-icon">⚡</div>
+      <div class="brand-text">
+        <h1>EV Market Analytics</h1>
+        <span>Tableau Intelligence Platform</span>
+      </div>
+    </a>
+
+    <nav>
+      <ul class="nav-links">
+        <li class="nav-item">
+          <a href="{{ url_for('index') }}" class="{% if active_page == 'home' %}active{% endif %}">
+            <span>🌐</span> Overview
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="{{ url_for('strategy') }}" class="{% if active_page == 'strategy' %}active{% endif %}">
+            <span>📊</span> Strategy (Emily)
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="{{ url_for('bi') }}" class="{% if active_page == 'bi' %}active{% endif %}">
+            <span>📈</span> BI (David)
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="{{ url_for('research') }}" class="{% if active_page == 'research' %}active{% endif %}">
+            <span>🔬</span> Research (Dr. Sarah)
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="{{ url_for('story') }}" class="{% if active_page == 'story' %}active{% endif %}">
+            <span>📖</span> Tableau Story
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="{{ url_for('explorer') }}" class="{% if active_page == 'explorer' %}active{% endif %}">
+            <span>🔍</span> Data Explorer
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="{{ url_for('performance') }}" class="{% if active_page == 'performance' %}active{% endif %}">
+            <span>⚡</span> Performance
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="{{ url_for('download_twbx') }}" class="nav-cta">
+            <span>📥</span> Download .TWBX
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Main Dynamic Body -->
+  <main class="container">
+    {% block content %}{% endblock %}
+  </main>
+
+  <!-- Global Footer -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div>
+        <p><strong>Electric Vehicle Market Performance & Insights</strong> | Tableau & BI Analytics Capstone</p>
+        <p style="color: var(--text-dim); font-size: 0.8rem; margin-top: 0.25rem;">
+          Integrated with Tableau Desktop / Public XML Engine & Flask Web Integration
+        </p>
+      </div>
+      <ul class="footer-links">
+        <li><a href="{{ url_for('download_csv') }}">Download Cleaned CSV</a></li>
+        <li><a href="{{ url_for('download_twb') }}">Tableau .TWB</a></li>
+        <li><a href="{{ url_for('download_twbx') }}">Tableau .TWBX</a></li>
+        <li><a href="{{ url_for('performance') }}">Benchmark SLA</a></li>
+      </ul>
+    </div>
+  </footer>
+
+  <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+  {% block scripts %}{% endblock %}
+</body>
+</html>

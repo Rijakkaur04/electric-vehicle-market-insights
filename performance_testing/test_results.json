@@ -1,0 +1,71 @@
+{
+    "timestamp": "2026-10-27 23:43:22",
+    "environment": {
+        "os": "Windows 11 64-bit",
+        "cpu_cores": 18,
+        "architecture": "AMD64",
+        "python_version": "3.14.4"
+    },
+    "data_loading": {
+        "test_name": "Data Loading & Ingestion Latency",
+        "file_size_kb": 197.24,
+        "row_count": 861,
+        "column_count": 26,
+        "elapsed_ms": 4.65,
+        "memory_usage_kb": 712.46,
+        "status": "PASSED (Well under < 250ms target)"
+    },
+    "filter_benchmarks": [
+        {
+            "filter_type": "Temporal Dimension Filter (Year = 2024)",
+            "result_records": 123,
+            "latency_ms": 2.485
+        },
+        {
+            "filter_type": "Multi-Dimension Categorical Filter (SUV/Sedan + NMC/LFP)",
+            "result_records": 542,
+            "latency_ms": 1.921
+        },
+        {
+            "filter_type": "Numerical Range Filter (Price >= $50K & Range >= 500km)",
+            "result_records": 289,
+            "latency_ms": 1.019
+        }
+    ],
+    "aggregation_benchmarks": [
+        {
+            "worksheet": "Sales by Vehicle Category & Battery Chemistry",
+            "output_cardinality": 20,
+            "render_compute_ms": 2.141
+        },
+        {
+            "worksheet": "Top Manufacturers Leaderboard Ranking",
+            "output_cardinality": 24,
+            "render_compute_ms": 9.366
+        },
+        {
+            "worksheet": "Global Manufacturing Footprint Map View",
+            "output_cardinality": 7,
+            "render_compute_ms": 4.869
+        }
+    ],
+    "calculated_fields_benchmarks": {
+        "calculated_fields_tested": [
+            "[Sales Revenue ($)] = [Annual Sales Units] * [Base Price USD]",
+            "[Range Efficiency (km/kWh)] = [Driving Range km] / [Battery Capacity kWh]",
+            "[Price per km ($/km)] = [Base Price USD] / [Driving Range km]"
+        ],
+        "execution_time_ms": 0.511,
+        "throughput_ops_per_sec": 5049853
+    },
+    "performance_verdict": {
+        "overall_status": "PASSED (Optimal Performance)",
+        "average_query_latency_ms": 1.808,
+        "average_aggregation_latency_ms": 5.459,
+        "optimization_recommendations": [
+            "Utilize Tableau Data Extract (.hyper) for production deployment to minimize direct I/O bottlenecks.",
+            "Materialize calculated fields like Sales Revenue and Range Efficiency at the extraction layer.",
+            "Apply Context Filters on Model Year and Production Region to pre-filter dimensions before complex LOD evaluations."
+        ]
+    }
+}

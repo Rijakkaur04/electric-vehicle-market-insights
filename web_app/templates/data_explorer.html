@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% block title %}Interactive Data Explorer | EV Market Analytics{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <div class="header-title">
+    <div class="persona-tag">
+      <span>🔍</span> Dataset Audit &amp; Exploration
+    </div>
+    <h2>Interactive EV Data Explorer</h2>
+    <p>Browse, query, and filter individual electric vehicle models, battery specifications, and performance records.</p>
+  </div>
+  <div style="display: flex; gap: 0.75rem;">
+    <a href="{{ url_for('download_csv') }}" class="btn-reset" style="background: var(--accent-green); color: #fff; font-weight: 600;">
+      📥 Export Full CSV (Cleaned)
+    </a>
+  </div>
+</div>
+
+<div class="filter-bar">
+  <div class="filter-group" style="flex: 1; max-width: 480px;">
+    <label for="explorer-search">Search Records:</label>
+    <input type="text" id="explorer-search" placeholder="Type Make, Model, Category, Battery Chem, or Country..." 
+           style="width: 100%; background: rgba(10, 14, 23, 0.9); border: 1px solid var(--border-color); color: #fff; padding: 0.5rem 1rem; border-radius: var(--radius-sm); outline: none;">
+  </div>
+  <span id="record-count-badge" class="chart-badge" style="margin-left: auto; font-size: 0.85rem; padding: 0.4rem 0.8rem;">
+    Loading records...
+  </span>
+</div>
+
+<div class="table-responsive">
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th>Record ID</th>
+        <th>Year</th>
+        <th>Make</th>
+        <th>Model Variant</th>
+        <th>Category</th>
+        <th>Battery Tech</th>
+        <th>Capacity</th>
+        <th>Driving Range</th>
+        <th>MSRP (USD)</th>
+        <th>Sales Units</th>
+        <th>Rating</th>
+        <th>Country</th>
+      </tr>
+    </thead>
+    <tbody id="explorer-tbody">
+      <tr>
+        <td colspan="12" style="text-align: center; padding: 2rem;">Loading data records...</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    loadExplorerRecords();
+  });
+</script>
+{% endblock %}

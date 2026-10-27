@@ -1,0 +1,148 @@
+{% extends "base.html" %}
+
+{% block title %}Competitive BI Dashboard | David Chen{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <div class="header-title">
+    <div class="persona-tag" style="background: rgba(16, 185, 129, 0.12); color: #10b981; border-color: rgba(16, 185, 129, 0.3);">
+      <span>🏢</span> Scenario 2: Competitive Intelligence &amp; Manufacturing
+    </div>
+    <h2>Automotive BI &amp; Market Share Dashboard</h2>
+    <p>Target Stakeholder: <strong>David Chen</strong> — Competitive Benchmarking, Geography &amp; Technology Distribution</p>
+  </div>
+  <div>
+    <span class="chart-badge" style="background: rgba(16, 185, 129, 0.2); color: #10b981; font-size: 0.85rem; padding: 0.4rem 0.8rem;">
+      OEM Intelligence Matrix
+    </span>
+  </div>
+</div>
+
+<!-- Dynamic Filter Toolbar -->
+<div class="filter-bar">
+  <div class="filter-group">
+    <label for="filter-year">Evaluation Year:</label>
+    <select id="filter-year">
+      <option value="all">Consolidated Timeline</option>
+      <option value="2025">2025 Forecast</option>
+      <option value="2024" selected>2024 Active Market</option>
+      <option value="2023">2023</option>
+      <option value="2022">2022</option>
+    </select>
+  </div>
+
+  <div class="filter-group">
+    <label for="filter-region">Production Region:</label>
+    <select id="filter-region">
+      <option value="all">Global Footprint</option>
+      <option value="Asia-Pacific">Asia-Pacific</option>
+      <option value="Europe">Europe</option>
+      <option value="North America">North America</option>
+    </select>
+  </div>
+
+  <button class="btn-reset" onclick="document.getElementById('filter-year').value='2024'; document.getElementById('filter-region').value='all'; refreshKPIs(); initBICharts();">
+    Reset Filters
+  </button>
+</div>
+
+<!-- BI KPI Grid -->
+<div class="kpi-grid">
+  <div class="kpi-card">
+    <div class="kpi-header">
+      <span class="kpi-title">Active Market Makers</span>
+      <div class="kpi-icon" style="background: rgba(16, 185, 129, 0.15); color: #10b981;">🏭</div>
+    </div>
+    <div class="kpi-value">16 OEMs</div>
+    <div class="kpi-subtext">Monitored global manufacturers</div>
+  </div>
+
+  <div class="kpi-card">
+    <div class="kpi-header">
+      <span class="kpi-title">Dominant Battery Chemistry</span>
+      <div class="kpi-icon" style="background: rgba(59, 130, 246, 0.15); color: #3b82f6;">🔋</div>
+    </div>
+    <div class="kpi-value">LFP / NMC</div>
+    <div class="kpi-subtext">84% combined volume share</div>
+  </div>
+
+  <div class="kpi-card">
+    <div class="kpi-header">
+      <span class="kpi-title">Leading Production Hub</span>
+      <div class="kpi-icon" style="background: rgba(6, 182, 212, 0.15); color: #06b6d4;">🌏</div>
+    </div>
+    <div class="kpi-value">China / USA</div>
+    <div class="kpi-subtext">68% of total assembly capacity</div>
+  </div>
+
+  <div class="kpi-card">
+    <div class="kpi-header">
+      <span class="kpi-title">Industry Avg Customer Rating</span>
+      <div class="kpi-icon" style="background: rgba(245, 158, 11, 0.15); color: #f59e0b;">⭐</div>
+    </div>
+    <div class="kpi-value">4.24 / 5.0</div>
+    <div class="kpi-subtext">High consumer brand loyalty</div>
+  </div>
+</div>
+
+<!-- BI Visual Charts Grid -->
+<div class="chart-grid">
+  <!-- Chart 1: Battery Chemistry Market Distribution -->
+  <div class="chart-card col-6">
+    <div class="chart-header">
+      <h3><span>🧪</span> Battery Technology Market Share</h3>
+      <span class="chart-badge">Volume Split</span>
+    </div>
+    <div class="chart-container">
+      <canvas id="chart-battery-share"></canvas>
+    </div>
+  </div>
+
+  <!-- Chart 2: Manufacturing Country Distribution -->
+  <div class="chart-card col-6">
+    <div class="chart-header">
+      <h3><span>🗺️</span> Global Manufacturing Assembly Volume</h3>
+      <span class="chart-badge">Geographic Breakdown</span>
+    </div>
+    <div class="chart-container">
+      <canvas id="chart-country-volume"></canvas>
+    </div>
+  </div>
+</div>
+
+<!-- Automotive BI Insights Callout -->
+<div class="insight-box" style="border-color: rgba(16, 185, 129, 0.3); background: linear-gradient(135deg, rgba(16, 185, 129, 0.08), rgba(6, 182, 212, 0.05));">
+  <div class="insight-header" style="color: var(--accent-green);">
+    <span>💼</span> Market Intelligence Briefing for David Chen's Consulting Clients
+  </div>
+  <ul class="insight-list">
+    <li class="insight-item">
+      <span class="insight-bullet" style="color: var(--accent-green);">▸</span>
+      <div>
+        <strong>Supply Chain Regionalization:</strong> Manufacturing is heavily clustered in China, the USA, and Germany. Client entrants must establish localized battery cell gigafactories to avoid cross-border tariffs and qualify for local EV subsidies.
+      </div>
+    </li>
+    <li class="insight-item">
+      <span class="insight-bullet" style="color: var(--accent-green);">▸</span>
+      <div>
+        <strong>LFP Price Leadership:</strong> Lithium Iron Phosphate continues eating into NMC's historical dominance due to zero-cobalt cost advantages, creating an impenetrable moat for high-volume entry vehicles.
+      </div>
+    </li>
+    <li class="insight-item">
+      <span class="insight-bullet" style="color: var(--accent-green);">▸</span>
+      <div>
+        <strong>Two-Wheeler Electrification Boom:</strong> Emerging economies like India show exponential compound annual growth rates (CAGR) in electrified scooters and micro-mobility, offering high-margin rapid market entry.
+      </div>
+    </li>
+  </ul>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    refreshKPIs();
+    initBICharts();
+  });
+</script>
+{% endblock %}

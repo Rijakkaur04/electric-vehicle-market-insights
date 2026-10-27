@@ -1,0 +1,283 @@
+{% extends "base.html" %}
+
+{% block title %}Tableau Story | Electric Vehicle Market Transformation{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <div class="header-title">
+    <div class="persona-tag">
+      <span>📖</span> Epic 5: Tableau Story Mode
+    </div>
+    <h2>Tableau Narrative Story: The EV Market Transformation</h2>
+    <p>Guided 5-point executive walkthrough from historical registration surge to the 2030 net-zero roadmap.</p>
+  </div>
+  <div>
+    <a href="{{ url_for('download_twbx') }}" class="btn-reset" style="background: var(--accent-blue); color: #fff; font-weight: 600;">
+      📥 Open in Tableau Desktop / Public (.twbx)
+    </a>
+  </div>
+</div>
+
+<!-- Story Navigation Tabs -->
+<div class="story-tabs">
+  <button class="story-tab active" data-target="story-pt-1">
+    <span>1️⃣</span> Adoption S-Curve (2019-2025)
+  </button>
+  <button class="story-tab" data-target="story-pt-2">
+    <span>2️⃣</span> Category Sales &amp; Revenue
+  </button>
+  <button class="story-tab" data-target="story-pt-3">
+    <span>3️⃣</span> The Battery Chemistry Race
+  </button>
+  <button class="story-tab" data-target="story-pt-4">
+    <span>4️⃣</span> Global Manufacturing Footprint
+  </button>
+  <button class="story-tab" data-target="story-pt-5">
+    <span>5️⃣</span> 2030 Strategic Roadmap
+  </button>
+</div>
+
+<!-- Story Point 1 -->
+<div class="story-content-panel active" id="story-pt-1">
+  <div class="chart-grid">
+    <div class="chart-card col-8">
+      <div class="chart-header">
+        <h3><span>📈</span> Story Point 1: The Global EV Registration S-Curve Surge</h3>
+        <span class="chart-badge">Macro Adoption</span>
+      </div>
+      <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1rem;">
+        Between 2019 and 2024, global electric vehicle registrations experienced an unprecedented 450% surge. Starting from early early-adopter luxury sedans, mainstream market inflection occurred in 2021 as battery pack prices dipped near the elusive $100/kWh parity threshold.
+      </p>
+      <div class="chart-container" style="min-height: 380px;">
+        <canvas id="chart-story-1"></canvas>
+      </div>
+    </div>
+    <div class="chart-card col-4">
+      <div class="chart-header">
+        <h3><span>🔍</span> Key Story Takeaways</h3>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 1rem; font-size: 0.88rem; color: var(--text-muted);">
+        <div style="background: rgba(255,255,255,0.03); padding: 1rem; border-radius: var(--radius-sm); border-left: 3px solid #3b82f6;">
+          <strong style="color: #fff;">Inflection Year: 2021</strong>
+          <p style="margin-top: 0.25rem;">Global sales jumped over 60% YoY, proving EV transition was consumer-driven rather than purely regulatory.</p>
+        </div>
+        <div style="background: rgba(255,255,255,0.03); padding: 1rem; border-radius: var(--radius-sm); border-left: 3px solid #10b981;">
+          <strong style="color: #fff;">2025 Forecast: 19M+ Units</strong>
+          <p style="margin-top: 0.25rem;">Electrified vehicles projected to reach 22% of total worldwide light-duty passenger vehicle production.</p>
+        </div>
+        <div style="background: rgba(255,255,255,0.03); padding: 1rem; border-radius: var(--radius-sm); border-left: 3px solid #06b6d4;">
+          <strong style="color: #fff;">Customer Rating Stability: 4.2+</strong>
+          <p style="margin-top: 0.25rem;">Early reliability issues resolved; EV buyer satisfaction outpaces legacy ICE vehicles by 14%.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Story Point 2 -->
+<div class="story-content-panel" id="story-pt-2">
+  <div class="chart-grid">
+    <div class="chart-card col-8">
+      <div class="chart-header">
+        <h3><span>🚙</span> Story Point 2: Category Dynamics &amp; Profitability Engine</h3>
+        <span class="chart-badge">Segment Economics</span>
+      </div>
+      <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1rem;">
+        SUVs and Sedans generate over 75% of cumulative OEM revenues. Simultaneously, electric two-wheelers in emerging markets (India, Southeast Asia) represent the highest volume velocity, democratizing emissions-free urban mobility.
+      </p>
+      <div class="chart-container" style="min-height: 380px;">
+        <canvas id="chart-story-2"></canvas>
+      </div>
+    </div>
+    <div class="chart-card col-4">
+      <div class="chart-header">
+        <h3><span>💡</span> Portfolio Synthesis</h3>
+      </div>
+      <ul style="list-style: none; display: flex; flex-direction: column; gap: 1rem; font-size: 0.88rem; color: var(--text-muted);">
+        <li>🏆 <strong>Crossover SUVs:</strong> Highest margin contribution ($45K-$65K average MSRP).</li>
+        <li>🛵 <strong>Two-Wheelers:</strong> Highest total registered units (over 5M units in Asia-Pacific).</li>
+        <li>🚛 <strong>Heavy Commercial:</strong> Emerging 2024-2025 growth sector with massive carbon impact per unit.</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- Story Point 3 -->
+<div class="story-content-panel" id="story-pt-3">
+  <div class="chart-grid">
+    <div class="chart-card col-8">
+      <div class="chart-header">
+        <h3><span>🧪</span> Story Point 3: The Battery Chemistry Revolution</h3>
+        <span class="chart-badge">Electrochemical Frontier</span>
+      </div>
+      <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1rem;">
+        The market has cleaved into two primary paradigms: Low-cost, long-life Lithium Iron Phosphate (LFP) for city commuters, and energy-dense Nickel Manganese Cobalt (NMC) / Solid-State for 600+ km grand tourers.
+      </p>
+      <div class="chart-container" style="min-height: 380px;">
+        <canvas id="chart-story-3"></canvas>
+      </div>
+    </div>
+    <div class="chart-card col-4">
+      <div class="chart-header">
+        <h3><span>🔬</span> Chemistry Highlights</h3>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 1rem; font-size: 0.88rem; color: var(--text-muted);">
+        <div><strong>LFP Share:</strong> 48% of global unit sales. Zero cobalt, 40% lower fire risk.</div>
+        <div><strong>Solid-State Emergence:</strong> Enables 800+ km range and sub-15 minute fast charging.</div>
+        <div><strong>Sodium-Ion Disruption:</strong> Zero lithium supply risk, sub-$50/kWh cell cost.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Story Point 4 -->
+<div class="story-content-panel" id="story-pt-4">
+  <div class="chart-grid">
+    <div class="chart-card col-8">
+      <div class="chart-header">
+        <h3><span>🗺️</span> Story Point 4: Global Manufacturing Centers &amp; Gigafactory Density</h3>
+        <span class="chart-badge">Supply Chain Hegemony</span>
+      </div>
+      <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1rem;">
+        China maintains integrated supply chain dominance from mineral refining to cathode synthesis. The US and Europe are rapidly expanding domestic Gigafactories through policy incentives (US IRA &amp; European Net Zero Industry Act).
+      </p>
+      <div class="chart-container" style="min-height: 380px;">
+        <canvas id="chart-story-4"></canvas>
+      </div>
+    </div>
+    <div class="chart-card col-4">
+      <div class="chart-header">
+        <h3><span>🏭</span> Regional Footprints</h3>
+      </div>
+      <ul style="list-style: none; display: flex; flex-direction: column; gap: 1rem; font-size: 0.88rem; color: var(--text-muted);">
+        <li>🇨🇳 <strong>China:</strong> 52% of global EV assembly &amp; 75% of battery cell production.</li>
+        <li>🇺🇸 <strong>USA:</strong> Rapidly expanding with Tesla, Rivian, Ford, and Proterra.</li>
+        <li>🇩🇪 <strong>Germany:</strong> European engineering hub (VW Group, BMW, Mercedes-Benz).</li>
+        <li>🇮🇳 <strong>India:</strong> Epicenter of 2-wheeler and municipal electric bus manufacturing.</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- Story Point 5 -->
+<div class="story-content-panel" id="story-pt-5">
+  <div class="chart-card col-12" style="background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(16, 185, 129, 0.08)); border-color: rgba(59, 130, 246, 0.3);">
+    <div class="chart-header">
+      <h3><span>🎯</span> Story Point 5: Strategic Executive Roadmap Toward 2030</h3>
+      <span class="chart-badge" style="background: rgba(16, 185, 129, 0.2); color: #10b981;">Synthesis &amp; Recommendations</span>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 1rem;">
+      <div style="background: rgba(10, 14, 23, 0.6); padding: 1.5rem; border-radius: var(--radius-sm); border-top: 3px solid #3b82f6;">
+        <h4 style="color: #3b82f6; margin-bottom: 0.5rem;">For Emily Johnson (Strategy)</h4>
+        <p style="font-size: 0.88rem; color: var(--text-muted);">
+          Transition 60% of vehicle trims to modular LFP blade battery packs to unlock mass-market sub-$30K affordability while safeguarding profit margins.
+        </p>
+      </div>
+      <div style="background: rgba(10, 14, 23, 0.6); padding: 1.5rem; border-radius: var(--radius-sm); border-top: 3px solid #10b981;">
+        <h4 style="color: #10b981; margin-bottom: 0.5rem;">For David Chen (BI Consulting)</h4>
+        <p style="font-size: 0.88rem; color: var(--text-muted);">
+          Advise automotive clients to co-invest directly with local Gigafactories in Europe and North America to shield against geopolitical tariffs and logistics shocks.
+        </p>
+      </div>
+      <div style="background: rgba(10, 14, 23, 0.6); padding: 1.5rem; border-radius: var(--radius-sm); border-top: 3px solid #8b5cf6;">
+        <h4 style="color: #8b5cf6; margin-bottom: 0.5rem;">For Dr. Sarah Williams (Research)</h4>
+        <p style="font-size: 0.88rem; color: var(--text-muted);">
+          Focus decarbonization policy on commercial transit buses and heavy freight trucks, where each battery-electric vehicle abates 18x - 45x more CO2 than personal cars.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+  document.addEventListener("DOMContentLoaded", async () => {
+    // Story Point 1 Chart: Multi-Year Trajectory
+    try {
+      const res = await fetch("/api/charts/yearly-trajectory");
+      const data = await res.json();
+      const ctx1 = document.getElementById("chart-story-1");
+      if (ctx1) {
+        const datasets = Object.keys(data.categories).map((cat, idx) => ({
+          label: cat,
+          data: data.categories[cat],
+          borderColor: COLORS.palette[idx % COLORS.palette.length],
+          backgroundColor: COLORS.palette[idx % COLORS.palette.length],
+          tension: 0.35,
+          borderWidth: 2
+        }));
+        new Chart(ctx1, {
+          type: "line",
+          data: { labels: data.years, datasets },
+          options: { responsive: true, maintainAspectRatio: false }
+        });
+      }
+    } catch(e) {}
+
+    // Story Point 2 Chart: Category Sales
+    try {
+      const res = await fetch("/api/charts/category-sales");
+      const data = await res.json();
+      const ctx2 = document.getElementById("chart-story-2");
+      if (ctx2) {
+        new Chart(ctx2, {
+          type: "bar",
+          data: {
+            labels: data.categories,
+            datasets: [{
+              label: "Registered Units",
+              data: data.sales,
+              backgroundColor: "rgba(59, 130, 246, 0.8)",
+              borderRadius: 6
+            }]
+          },
+          options: { responsive: true, maintainAspectRatio: false }
+        });
+      }
+    } catch(e) {}
+
+    // Story Point 3 Chart: Battery Distribution
+    try {
+      const res = await fetch("/api/charts/battery-distribution");
+      const data = await res.json();
+      const ctx3 = document.getElementById("chart-story-3");
+      if (ctx3) {
+        new Chart(ctx3, {
+          type: "doughnut",
+          data: {
+            labels: data.chemistries,
+            datasets: [{
+              data: data.sales,
+              backgroundColor: ["#10b981", "#3b82f6", "#f59e0b", "#8b5cf6", "#06b6d4"]
+            }]
+          },
+          options: { responsive: true, maintainAspectRatio: false }
+        });
+      }
+    } catch(e) {}
+
+    // Story Point 4 Chart: Manufacturing Countries
+    try {
+      const res = await fetch("/api/charts/country-production");
+      const data = await res.json();
+      const ctx4 = document.getElementById("chart-story-4");
+      if (ctx4) {
+        new Chart(ctx4, {
+          type: "bar",
+          data: {
+            labels: data.countries,
+            datasets: [{
+              label: "Units Manufactured",
+              data: data.units,
+              backgroundColor: "rgba(99, 102, 241, 0.8)",
+              borderRadius: 6
+            }]
+          },
+          options: { responsive: true, maintainAspectRatio: false }
+        });
+      }
+    } catch(e) {}
+  });
+</script>
+{% endblock %}

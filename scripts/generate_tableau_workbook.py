@@ -1,0 +1,589 @@
+"""
+Electric Vehicle Market Performance & Insights
+Epic 3, 4, 5: Tableau Workbook & Story Generator
+
+Generates a fully valid Tableau Workbook (.twb) and Packaged Workbook (.twbx)
+featuring 9 worksheets, 3 persona dashboards, and a complete 5-point Tableau Story.
+"""
+
+import os
+import zipfile
+import xml.etree.ElementTree as ET
+
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+TABLEAU_DIR = os.path.join(BASE_DIR, "tableau")
+PROCESSED_CSV_PATH = os.path.join(BASE_DIR, "data", "processed", "EV_Market_Performance_Cleaned.csv")
+TWB_PATH = os.path.join(TABLEAU_DIR, "Electric_Vehicle_Market_Performance.twb")
+TWBX_PATH = os.path.join(TABLEAU_DIR, "Electric_Vehicle_Market_Performance.twbx")
+
+def generate_twb_xml():
+    """Builds the comprehensive Tableau XML definition."""
+    xml_content = """<?xml version='1.0' encoding='utf-8' ?>
+<workbook source-build='2024.1.0' source-platform='win' version='18.1' xmlns:user='http://www.tableausoftware.com/xml/user'>
+  <document-format-change-manifest>
+    <AutoCreateAndUpdateDivergingColorRanges />
+    <MapboxVectorStylesAndLayers />
+    <MarkAnimation />
+    <ObjectModelEncapsulateLegacy />
+    <ObjectModelTableType />
+    <SchemaViewerObjectModel />
+    <SheetIdentifierTracking />
+    <StoryPointCaption />
+    <WindowsPersistSimpleIdentifiers />
+  </document-format-change-manifest>
+  <preferences>
+    <preference name='ui.encoding.shelf.height' value='24' />
+    <preference name='ui.shelf.height' value='26' />
+  </preferences>
+  <datasources>
+    <datasource caption='EV_Market_Performance_Cleaned' inline='true' name='federated.ev_market_cleaned' version='18.1'>
+      <connection class='federated'>
+        <named-connections>
+          <named-connection caption='EV_Market_Performance_Cleaned' name='textscan.ev_market_data'>
+            <connection class='textscan' directory='../data/processed' filename='EV_Market_Performance_Cleaned.csv' password='' server='' />
+          </named-connection>
+        </named-connections>
+        <relation connection='textscan.ev_market_data' name='EV_Market_Performance_Cleaned.csv' table='[EV_Market_Performance_Cleaned#csv]' type='table'>
+          <columns character-set='UTF-8' header='yes' locale='en_US' separator=','>
+            <column datatype='string' name='Record_ID' ordinal='0' />
+            <column datatype='integer' name='Model_Year' ordinal='1' />
+            <column datatype='string' name='Make' ordinal='2' />
+            <column datatype='string' name='Model' ordinal='3' />
+            <column datatype='string' name='Model_Variant' ordinal='4' />
+            <column datatype='string' name='Vehicle_Category' ordinal='5' />
+            <column datatype='string' name='Battery_Technology' ordinal='6' />
+            <column datatype='real' name='Battery_Capacity_kWh' ordinal='7' />
+            <column datatype='integer' name='Driving_Range_km' ordinal='8' />
+            <column datatype='integer' name='Base_Price_USD' ordinal='9' />
+            <column datatype='integer' name='Fast_Charge_Time_mins' ordinal='10' />
+            <column datatype='real' name='Standard_Charge_Time_hrs' ordinal='11' />
+            <column datatype='integer' name='Annual_Sales_Units' ordinal='12' />
+            <column datatype='real' name='Sales_Revenue_USD' ordinal='13' />
+            <column datatype='real' name='Customer_Rating' ordinal='14' />
+            <column datatype='real' name='Energy_Consumption_kWh_100km' ordinal='15' />
+            <column datatype='integer' name='Carbon_Offset_Tons' ordinal='16' />
+            <column datatype='string' name='Manufacturing_Country' ordinal='17' />
+            <column datatype='string' name='Production_Region' ordinal='18' />
+            <column datatype='string' name='Status' ordinal='19' />
+            <column datatype='real' name='Range_Efficiency_km_per_kWh' ordinal='20' />
+            <column datatype='real' name='Price_per_km_Range_USD' ordinal='21' />
+            <column datatype='real' name='Market_Share_Percentage' ordinal='22' />
+            <column datatype='string' name='Satisfaction_Tier' ordinal='23' />
+            <column datatype='string' name='Range_Category' ordinal='24' />
+            <column datatype='string' name='Price_Segment' ordinal='25' />
+          </columns>
+        </relation>
+      </connection>
+      <aliases enabled='yes' />
+      <column caption='Record ID' datatype='string' name='[Record_ID]' role='dimension' type='nominal' />
+      <column caption='Model Year' datatype='integer' name='[Model_Year]' role='dimension' type='ordinal' />
+      <column caption='Make / Manufacturer' datatype='string' name='[Make]' role='dimension' type='nominal' />
+      <column caption='Model Family' datatype='string' name='[Model]' role='dimension' type='nominal' />
+      <column caption='Model Trim Variant' datatype='string' name='[Model_Variant]' role='dimension' type='nominal' />
+      <column caption='Vehicle Category' datatype='string' name='[Vehicle_Category]' role='dimension' type='nominal' />
+      <column caption='Battery Technology' datatype='string' name='[Battery_Technology]' role='dimension' type='nominal' />
+      <column caption='Battery Capacity (kWh)' datatype='real' name='[Battery_Capacity_kWh]' role='measure' type='quantitative' />
+      <column caption='Driving Range (km)' datatype='integer' name='[Driving_Range_km]' role='measure' type='quantitative' />
+      <column caption='Base MSRP (USD)' datatype='integer' name='[Base_Price_USD]' role='measure' type='quantitative'>
+        <calculation class='tableau' formula='[Base_Price_USD]' />
+      </column>
+      <column caption='Fast Charge (mins)' datatype='integer' name='[Fast_Charge_Time_mins]' role='measure' type='quantitative' />
+      <column caption='Standard Charge (hrs)' datatype='real' name='[Standard_Charge_Time_hrs]' role='measure' type='quantitative' />
+      <column caption='Annual Sales (Units)' datatype='integer' name='[Annual_Sales_Units]' role='measure' type='quantitative' />
+      <column caption='Sales Revenue ($)' datatype='real' name='[Sales_Revenue_USD]' role='measure' type='quantitative' />
+      <column caption='Customer Rating (1-5)' datatype='real' name='[Customer_Rating]' role='measure' type='quantitative' />
+      <column caption='Energy Consumption (kWh/100km)' datatype='real' name='[Energy_Consumption_kWh_100km]' role='measure' type='quantitative' />
+      <column caption='Carbon Offset (Tons CO2)' datatype='integer' name='[Carbon_Offset_Tons]' role='measure' type='quantitative' />
+      <column caption='Manufacturing Country' datatype='string' name='[Manufacturing_Country]' role='dimension' semantic-role='[Country].[ISO3166_2]' type='nominal' />
+      <column caption='Production Region' datatype='string' name='[Production_Region]' role='dimension' type='nominal' />
+      <column caption='Data Status' datatype='string' name='[Status]' role='dimension' type='nominal' />
+      <column caption='Range Efficiency (km/kWh)' datatype='real' name='[Range_Efficiency_km_per_kWh]' role='measure' type='quantitative' />
+      <column caption='Price per km Range ($/km)' datatype='real' name='[Price_per_km_Range_USD]' role='measure' type='quantitative' />
+      <column caption='Market Share (%)' datatype='real' name='[Market_Share_Percentage]' role='measure' type='quantitative' />
+      <column caption='Customer Satisfaction Tier' datatype='string' name='[Satisfaction_Tier]' role='dimension' type='nominal' />
+      <column caption='Range Segment' datatype='string' name='[Range_Category]' role='dimension' type='nominal' />
+      <column caption='Price Segment' datatype='string' name='[Price_Segment]' role='dimension' type='nominal' />
+
+      <!-- Calculated Field: Calculated Gross Revenue Formula -->
+      <column caption='Calculated Revenue ($)' datatype='real' name='[Calculation_Revenue]' role='measure' type='quantitative'>
+        <calculation class='tableau' formula='[Annual_Sales_Units] * [Base_Price_USD]' />
+      </column>
+
+      <!-- Calculated Field: Energy Efficiency Ratio -->
+      <column caption='Calc Range Efficiency' datatype='real' name='[Calculation_Efficiency]' role='measure' type='quantitative'>
+        <calculation class='tableau' formula='ROUND([Driving_Range_km] / [Battery_Capacity_kWh], 2)' />
+      </column>
+
+      <!-- Calculated Field: Price-to-Range Index -->
+      <column caption='Calc Price to Range ($/km)' datatype='real' name='[Calculation_Price_to_Range]' role='measure' type='quantitative'>
+        <calculation class='tableau' formula='ROUND([Base_Price_USD] / [Driving_Range_km], 2)' />
+      </column>
+    </datasource>
+  </datasources>
+
+  <worksheets>
+    <!-- Sheet 1: Sales by Vehicle Category -->
+    <worksheet name='Sales by Vehicle Category'>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='EV_Market_Performance_Cleaned' name='federated.ev_market_cleaned' />
+          </datasources>
+          <datasource-dependencies datasource='federated.ev_market_cleaned'>
+            <column-instance column='[Annual_Sales_Units]' derivation='Sum' name='[sum:Annual_Sales_Units:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Vehicle_Category]' derivation='None' name='[none:Vehicle_Category:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Battery_Technology]' derivation='None' name='[none:Battery_Technology:nk]' pivot='key' type='nominal' />
+          </datasource-dependencies>
+          <aggregation value='true' />
+        </view>
+        <style />
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Bar' />
+            <encodings>
+              <color column='[federated.ev_market_cleaned].[none:Battery_Technology:nk]' />
+              <tooltip column='[federated.ev_market_cleaned].[sum:Annual_Sales_Units:qk]' />
+            </encodings>
+          </pane>
+        </panes>
+        <rows>[federated.ev_market_cleaned].[none:Vehicle_Category:nk]</rows>
+        <cols>[federated.ev_market_cleaned].[sum:Annual_Sales_Units:qk]</cols>
+      </table>
+      <title>
+        <formatted-text>
+          <run bold='true' fontcolor='#1f2937' fontsize='14'>Annual EV Sales Volume by Vehicle Category &amp; Battery Chemistry</run>
+        </formatted-text>
+      </title>
+    </worksheet>
+
+    <!-- Sheet 2: Top Manufacturers Leaderboard -->
+    <worksheet name='Top Manufacturers Leaderboard'>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='EV_Market_Performance_Cleaned' name='federated.ev_market_cleaned' />
+          </datasources>
+          <datasource-dependencies datasource='federated.ev_market_cleaned'>
+            <column-instance column='[Annual_Sales_Units]' derivation='Sum' name='[sum:Annual_Sales_Units:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Make]' derivation='None' name='[none:Make:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Sales_Revenue_USD]' derivation='Sum' name='[sum:Sales_Revenue_USD:qk]' pivot='key' type='quantitative' />
+          </datasource-dependencies>
+          <aggregation value='true' />
+        </view>
+        <style />
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Bar' />
+            <encodings>
+              <color column='[federated.ev_market_cleaned].[sum:Sales_Revenue_USD:qk]' />
+              <tooltip column='[federated.ev_market_cleaned].[sum:Annual_Sales_Units:qk]' />
+            </encodings>
+          </pane>
+        </panes>
+        <rows>[federated.ev_market_cleaned].[none:Make:nk]</rows>
+        <cols>[federated.ev_market_cleaned].[sum:Annual_Sales_Units:qk]</cols>
+      </table>
+      <title>
+        <formatted-text>
+          <run bold='true' fontcolor='#1f2937' fontsize='14'>Top EV Manufacturers by Global Unit Sales &amp; Revenue</run>
+        </formatted-text>
+      </title>
+    </worksheet>
+
+    <!-- Sheet 3: Battery Technology Adoption -->
+    <worksheet name='Battery Technology Adoption'>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='EV_Market_Performance_Cleaned' name='federated.ev_market_cleaned' />
+          </datasources>
+          <datasource-dependencies datasource='federated.ev_market_cleaned'>
+            <column-instance column='[Annual_Sales_Units]' derivation='Sum' name='[sum:Annual_Sales_Units:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Battery_Technology]' derivation='None' name='[none:Battery_Technology:nk]' pivot='key' type='nominal' />
+          </datasource-dependencies>
+          <aggregation value='true' />
+        </view>
+        <style />
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Pie' />
+            <encodings>
+              <color column='[federated.ev_market_cleaned].[none:Battery_Technology:nk]' />
+              <size column='[federated.ev_market_cleaned].[sum:Annual_Sales_Units:qk]' />
+              <text column='[federated.ev_market_cleaned].[none:Battery_Technology:nk]' />
+            </encodings>
+          </pane>
+        </panes>
+        <rows />
+        <cols />
+      </table>
+      <title>
+        <formatted-text>
+          <run bold='true' fontcolor='#1f2937' fontsize='14'>Global Market Share by Battery Chemistry (LFP vs NMC vs NCA vs Solid-State)</run>
+        </formatted-text>
+      </title>
+    </worksheet>
+
+    <!-- Sheet 4: Driving Range vs Battery Capacity -->
+    <worksheet name='Driving Range vs Battery Capacity'>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='EV_Market_Performance_Cleaned' name='federated.ev_market_cleaned' />
+          </datasources>
+          <datasource-dependencies datasource='federated.ev_market_cleaned'>
+            <column-instance column='[Battery_Capacity_kWh]' derivation='None' name='[none:Battery_Capacity_kWh:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Driving_Range_km]' derivation='None' name='[none:Driving_Range_km:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Battery_Technology]' derivation='None' name='[none:Battery_Technology:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Model]' derivation='None' name='[none:Model:nk]' pivot='key' type='nominal' />
+          </datasource-dependencies>
+          <aggregation value='false' />
+        </view>
+        <style />
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Circle' />
+            <encodings>
+              <color column='[federated.ev_market_cleaned].[none:Battery_Technology:nk]' />
+              <detail column='[federated.ev_market_cleaned].[none:Model:nk]' />
+            </encodings>
+          </pane>
+        </panes>
+        <rows>[federated.ev_market_cleaned].[none:Driving_Range_km:qk]</rows>
+        <cols>[federated.ev_market_cleaned].[none:Battery_Capacity_kWh:qk]</cols>
+      </table>
+      <title>
+        <formatted-text>
+          <run bold='true' fontcolor='#1f2937' fontsize='14'>Driving Range (km) vs. Battery Pack Capacity (kWh) by Technology</run>
+        </formatted-text>
+      </title>
+    </worksheet>
+
+    <!-- Sheet 5: Global Manufacturing Footprint -->
+    <worksheet name='Global Manufacturing Footprint'>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='EV_Market_Performance_Cleaned' name='federated.ev_market_cleaned' />
+          </datasources>
+          <datasource-dependencies datasource='federated.ev_market_cleaned'>
+            <column-instance column='[Manufacturing_Country]' derivation='None' name='[none:Manufacturing_Country:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Annual_Sales_Units]' derivation='Sum' name='[sum:Annual_Sales_Units:qk]' pivot='key' type='quantitative' />
+          </datasource-dependencies>
+          <aggregation value='true' />
+        </view>
+        <style />
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Square' />
+            <encodings>
+              <color column='[federated.ev_market_cleaned].[sum:Annual_Sales_Units:qk]' />
+              <size column='[federated.ev_market_cleaned].[sum:Annual_Sales_Units:qk]' />
+              <text column='[federated.ev_market_cleaned].[none:Manufacturing_Country:nk]' />
+            </encodings>
+          </pane>
+        </panes>
+        <rows>[federated.ev_market_cleaned].[none:Manufacturing_Country:nk]</rows>
+        <cols>[federated.ev_market_cleaned].[sum:Annual_Sales_Units:qk]</cols>
+      </table>
+      <title>
+        <formatted-text>
+          <run bold='true' fontcolor='#1f2937' fontsize='14'>Global EV Production Volume by Manufacturing Nation</run>
+        </formatted-text>
+      </title>
+    </worksheet>
+
+    <!-- Sheet 6: Customer Satisfaction Analysis -->
+    <worksheet name='Customer Satisfaction Analysis'>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='EV_Market_Performance_Cleaned' name='federated.ev_market_cleaned' />
+          </datasources>
+          <datasource-dependencies datasource='federated.ev_market_cleaned'>
+            <column-instance column='[Customer_Rating]' derivation='Avg' name='[avg:Customer_Rating:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Vehicle_Category]' derivation='None' name='[none:Vehicle_Category:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Battery_Technology]' derivation='None' name='[none:Battery_Technology:nk]' pivot='key' type='nominal' />
+          </datasource-dependencies>
+          <aggregation value='true' />
+        </view>
+        <style />
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Square' />
+            <encodings>
+              <color column='[federated.ev_market_cleaned].[avg:Customer_Rating:qk]' />
+              <text column='[federated.ev_market_cleaned].[avg:Customer_Rating:qk]' />
+            </encodings>
+          </pane>
+        </panes>
+        <rows>[federated.ev_market_cleaned].[none:Vehicle_Category:nk]</rows>
+        <cols>[federated.ev_market_cleaned].[none:Battery_Technology:nk]</cols>
+      </table>
+      <title>
+        <formatted-text>
+          <run bold='true' fontcolor='#1f2937' fontsize='14'>Average Customer Satisfaction Ratings Heatmap (1 to 5 Stars)</run>
+        </formatted-text>
+      </title>
+    </worksheet>
+
+    <!-- Sheet 7: Market Growth Trajectory YoY -->
+    <worksheet name='Market Growth Trajectory YoY'>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='EV_Market_Performance_Cleaned' name='federated.ev_market_cleaned' />
+          </datasources>
+          <datasource-dependencies datasource='federated.ev_market_cleaned'>
+            <column-instance column='[Model_Year]' derivation='None' name='[none:Model_Year:ok]' pivot='key' type='ordinal' />
+            <column-instance column='[Annual_Sales_Units]' derivation='Sum' name='[sum:Annual_Sales_Units:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Vehicle_Category]' derivation='None' name='[none:Vehicle_Category:nk]' pivot='key' type='nominal' />
+          </datasource-dependencies>
+          <aggregation value='true' />
+        </view>
+        <style />
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Line' />
+            <encodings>
+              <color column='[federated.ev_market_cleaned].[none:Vehicle_Category:nk]' />
+            </encodings>
+          </pane>
+        </panes>
+        <rows>[federated.ev_market_cleaned].[sum:Annual_Sales_Units:qk]</rows>
+        <cols>[federated.ev_market_cleaned].[none:Model_Year:ok]</cols>
+      </table>
+      <title>
+        <formatted-text>
+          <run bold='true' fontcolor='#1f2937' fontsize='14'>Multi-Year EV Registration Surge Across Vehicle Categories (2019-2025)</run>
+        </formatted-text>
+      </title>
+    </worksheet>
+
+    <!-- Sheet 8: Price vs Range Efficiency Matrix -->
+    <worksheet name='Price vs Range Efficiency Matrix'>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='EV_Market_Performance_Cleaned' name='federated.ev_market_cleaned' />
+          </datasources>
+          <datasource-dependencies datasource='federated.ev_market_cleaned'>
+            <column-instance column='[Base_Price_USD]' derivation='None' name='[none:Base_Price_USD:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Range_Efficiency_km_per_kWh]' derivation='None' name='[none:Range_Efficiency_km_per_kWh:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Vehicle_Category]' derivation='None' name='[none:Vehicle_Category:nk]' pivot='key' type='nominal' />
+          </datasource-dependencies>
+          <aggregation value='false' />
+        </view>
+        <style />
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Circle' />
+            <encodings>
+              <color column='[federated.ev_market_cleaned].[none:Vehicle_Category:nk]' />
+            </encodings>
+          </pane>
+        </panes>
+        <rows>[federated.ev_market_cleaned].[none:Range_Efficiency_km_per_kWh:qk]</rows>
+        <cols>[federated.ev_market_cleaned].[none:Base_Price_USD:qk]</cols>
+      </table>
+      <title>
+        <formatted-text>
+          <run bold='true' fontcolor='#1f2937' fontsize='14'>Vehicle Affordability vs. Battery Range Efficiency (km/kWh)</run>
+        </formatted-text>
+      </title>
+    </worksheet>
+
+    <!-- Sheet 9: Carbon Offset Sustainability -->
+    <worksheet name='Carbon Offset Sustainability'>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='EV_Market_Performance_Cleaned' name='federated.ev_market_cleaned' />
+          </datasources>
+          <datasource-dependencies datasource='federated.ev_market_cleaned'>
+            <column-instance column='[Carbon_Offset_Tons]' derivation='Sum' name='[sum:Carbon_Offset_Tons:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Vehicle_Category]' derivation='None' name='[none:Vehicle_Category:nk]' pivot='key' type='nominal' />
+          </datasource-dependencies>
+          <aggregation value='true' />
+        </view>
+        <style />
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Bar' />
+            <encodings>
+              <color column='[federated.ev_market_cleaned].[none:Vehicle_Category:nk]' />
+            </encodings>
+          </pane>
+        </panes>
+        <rows>[federated.ev_market_cleaned].[none:Vehicle_Category:nk]</rows>
+        <cols>[federated.ev_market_cleaned].[sum:Carbon_Offset_Tons:qk]</cols>
+      </table>
+      <title>
+        <formatted-text>
+          <run bold='true' fontcolor='#1f2937' fontsize='14'>Net Avoided CO2 Emissions (Metric Tons) by Vehicle Segment</run>
+        </formatted-text>
+      </title>
+    </worksheet>
+  </worksheets>
+
+  <dashboards>
+    <!-- Dashboard 1: Executive Market Strategy (Emily Johnson) -->
+    <dashboard name='Dashboard 1 - Executive Strategy'>
+      <style />
+      <size maxheight='900' maxwidth='1400' minheight='900' minwidth='1400' sizing-mode='fixed' />
+      <zones>
+        <zone h='100000' id='1' type='layout-basic' w='100000' x='0' y='0'>
+          <zone h='10000' id='2' type='title' w='100000' x='0' y='0' />
+          <zone h='45000' id='3' type='layout-flow' w='100000' x='0' y='10000'>
+            <zone h='45000' id='4' name='Sales by Vehicle Category' w='50000' x='0' y='10000' />
+            <zone h='45000' id='5' name='Top Manufacturers Leaderboard' w='50000' x='50000' y='10000' />
+          </zone>
+          <zone h='45000' id='6' type='layout-flow' w='100000' x='0' y='55000'>
+            <zone h='45000' id='7' name='Market Growth Trajectory YoY' w='50000' x='0' y='55000' />
+            <zone h='45000' id='8' name='Customer Satisfaction Analysis' w='50000' x='50000' y='55000' />
+          </zone>
+        </zone>
+      </zones>
+    </dashboard>
+
+    <!-- Dashboard 2: Competitive BI & Manufacturing (David Chen) -->
+    <dashboard name='Dashboard 2 - Competitive BI'>
+      <style />
+      <size maxheight='900' maxwidth='1400' minheight='900' minwidth='1400' sizing-mode='fixed' />
+      <zones>
+        <zone h='100000' id='11' type='layout-basic' w='100000' x='0' y='0'>
+          <zone h='10000' id='12' type='title' w='100000' x='0' y='0' />
+          <zone h='45000' id='13' type='layout-flow' w='100000' x='0' y='10000'>
+            <zone h='45000' id='14' name='Battery Technology Adoption' w='50000' x='0' y='10000' />
+            <zone h='45000' id='15' name='Global Manufacturing Footprint' w='50000' x='50000' y='10000' />
+          </zone>
+          <zone h='45000' id='16' type='layout-flow' w='100000' x='0' y='55000'>
+            <zone h='45000' id='17' name='Top Manufacturers Leaderboard' w='50000' x='0' y='55000' />
+            <zone h='45000' id='18' name='Price vs Range Efficiency Matrix' w='50000' x='50000' y='55000' />
+          </zone>
+        </zone>
+      </zones>
+    </dashboard>
+
+    <!-- Dashboard 3: Sustainable Mobility Research (Dr. Sarah Williams) -->
+    <dashboard name='Dashboard 3 - Sustainable Research'>
+      <style />
+      <size maxheight='900' maxwidth='1400' minheight='900' minwidth='1400' sizing-mode='fixed' />
+      <zones>
+        <zone h='100000' id='21' type='layout-basic' w='100000' x='0' y='0'>
+          <zone h='10000' id='22' type='title' w='100000' x='0' y='0' />
+          <zone h='45000' id='23' type='layout-flow' w='100000' x='0' y='10000'>
+            <zone h='45000' id='24' name='Driving Range vs Battery Capacity' w='50000' x='0' y='10000' />
+            <zone h='45000' id='25' name='Battery Technology Adoption' w='50000' x='50000' y='10000' />
+          </zone>
+          <zone h='45000' id='26' type='layout-flow' w='100000' x='0' y='55000'>
+            <zone h='45000' id='27' name='Price vs Range Efficiency Matrix' w='50000' x='0' y='55000' />
+            <zone h='45000' id='28' name='Carbon Offset Sustainability' w='50000' x='50000' y='55000' />
+          </zone>
+        </zone>
+      </zones>
+    </dashboard>
+  </dashboards>
+
+  <stories>
+    <!-- Epic 5: Tableau Story - Electric Vehicle Market Transformation -->
+    <story name='Story - EV Market Transformation'>
+      <style />
+      <size maxheight='960' maxwidth='1440' minheight='960' minwidth='1440' sizing-mode='fixed' />
+      <story-points>
+        <!-- Story Point 1 -->
+        <story-point caption='1. The Global EV Adoption Surge (2019-2025)' id='1'>
+          <dashboard name='Dashboard 1 - Executive Strategy' />
+        </story-point>
+
+        <!-- Story Point 2 -->
+        <story-point caption='2. Vehicle Category Sales &amp; Revenue Supremacy' id='2'>
+          <dashboard name='Dashboard 1 - Executive Strategy' />
+        </story-point>
+
+        <!-- Story Point 3 -->
+        <story-point caption='3. The Electrochemical Frontier: Battery Tech Disruption' id='3'>
+          <dashboard name='Dashboard 3 - Sustainable Research' />
+        </story-point>
+
+        <!-- Story Point 4 -->
+        <story-point caption='4. Global Manufacturing Hegemony &amp; Supply Chains' id='4'>
+          <dashboard name='Dashboard 2 - Competitive BI' />
+        </story-point>
+
+        <!-- Story Point 5 -->
+        <story-point caption='5. Strategic Roadmap: Sustainable Mobility Toward 2030' id='5'>
+          <dashboard name='Dashboard 3 - Sustainable Research' />
+        </story-point>
+      </story-points>
+    </story>
+  </stories>
+
+  <windows>
+    <window class='worksheet' name='Sales by Vehicle Category' />
+    <window class='worksheet' name='Top Manufacturers Leaderboard' />
+    <window class='worksheet' name='Battery Technology Adoption' />
+    <window class='worksheet' name='Driving Range vs Battery Capacity' />
+    <window class='worksheet' name='Global Manufacturing Footprint' />
+    <window class='worksheet' name='Customer Satisfaction Analysis' />
+    <window class='worksheet' name='Market Growth Trajectory YoY' />
+    <window class='worksheet' name='Price vs Range Efficiency Matrix' />
+    <window class='worksheet' name='Carbon Offset Sustainability' />
+    <window class='dashboard' name='Dashboard 1 - Executive Strategy' />
+    <window class='dashboard' name='Dashboard 2 - Competitive BI' />
+    <window class='dashboard' name='Dashboard 3 - Sustainable Research' />
+    <window class='story' maximized='true' name='Story - EV Market Transformation' />
+  </windows>
+</workbook>
+"""
+    with open(TWB_PATH, "w", encoding="utf-8") as f:
+        f.write(xml_content)
+    print(f"Generated Tableau Workbook (.twb) at: {TWB_PATH}")
+
+def generate_twbx_package():
+    """Packages the workbook and processed CSV data into a .twbx zip archive."""
+    with zipfile.ZipFile(TWBX_PATH, "w", zipfile.ZIP_DEFLATED) as zip_file:
+        # Add the workbook XML
+        zip_file.write(TWB_PATH, arcname="Electric_Vehicle_Market_Performance.twb")
+        # Add the data file under Data/
+        zip_file.write(PROCESSED_CSV_PATH, arcname="Data/EV_Market_Performance_Cleaned.csv")
+    print(f"Generated Tableau Packaged Workbook (.twbx) at: {TWBX_PATH}")
+
+def main():
+    print("=" * 60)
+    print("Executing Epic 3, 4, 5: Tableau Workbook & Story Generation")
+    print("=" * 60)
+    generate_twb_xml()
+    generate_twbx_package()
+    print("=" * 60)
+    print("Tableau Artifacts Generated Successfully!")
+
+if __name__ == "__main__":
+    main()

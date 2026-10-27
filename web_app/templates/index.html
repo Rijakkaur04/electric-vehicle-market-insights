@@ -1,0 +1,189 @@
+{% extends "base.html" %}
+
+{% block title %}Executive Overview | Electric Vehicle Market Performance & Insights{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <div class="header-title">
+    <div class="persona-tag">
+      <span>🚀</span> Global EV Market Intelligence Platform
+    </div>
+    <h2>Electric Vehicle Market Performance & Insights</h2>
+    <p>Comprehensive BI analytics, battery chemistry evaluation, and multi-scenario strategic intelligence.</p>
+  </div>
+  <div style="display: flex; gap: 0.75rem;">
+    <a href="{{ url_for('download_twbx') }}" class="btn-reset" style="background: var(--accent-blue); color: #fff; font-weight: 600;">
+      📥 Download Tableau Workbook (.twbx)
+    </a>
+    <a href="{{ url_for('download_csv') }}" class="btn-reset">
+      📄 Export Processed CSV Data
+    </a>
+  </div>
+</div>
+
+<!-- High-Level KPI Summary Grid -->
+<div class="kpi-grid">
+  <div class="kpi-card">
+    <div class="kpi-header">
+      <span class="kpi-title">Global Sales Volume</span>
+      <div class="kpi-icon" style="background: rgba(59, 130, 246, 0.15); color: #3b82f6;">🚗</div>
+    </div>
+    <div class="kpi-value">{{ kpis.total_sales }}</div>
+    <div class="kpi-subtext">Registered vehicles worldwide (2019-2025)</div>
+  </div>
+
+  <div class="kpi-card">
+    <div class="kpi-header">
+      <span class="kpi-title">Cumulative Market Revenue</span>
+      <div class="kpi-icon" style="background: rgba(16, 185, 129, 0.15); color: #10b981;">💰</div>
+    </div>
+    <div class="kpi-value">{{ kpis.total_revenue_b }}</div>
+    <div class="kpi-subtext">Gross vehicle turnover across categories</div>
+  </div>
+
+  <div class="kpi-card">
+    <div class="kpi-header">
+      <span class="kpi-title">Average Driving Range</span>
+      <div class="kpi-icon" style="background: rgba(6, 182, 212, 0.15); color: #06b6d4;">🔋</div>
+    </div>
+    <div class="kpi-value">{{ kpis.avg_range_km }}</div>
+    <div class="kpi-subtext">+38% range expansion since 2019</div>
+  </div>
+
+  <div class="kpi-card">
+    <div class="kpi-header">
+      <span class="kpi-title">Customer Satisfaction</span>
+      <div class="kpi-icon" style="background: rgba(245, 158, 11, 0.15); color: #f59e0b;">⭐</div>
+    </div>
+    <div class="kpi-value">{{ kpis.avg_rating }}</div>
+    <div class="kpi-subtext">91% in Delighted/Satisfied tiers</div>
+  </div>
+
+  <div class="kpi-card">
+    <div class="kpi-header">
+      <span class="kpi-title">Net Carbon Abatement</span>
+      <div class="kpi-icon" style="background: rgba(139, 92, 246, 0.15); color: #8b5cf6;">🌱</div>
+    </div>
+    <div class="kpi-value">{{ kpis.total_co2_m }}</div>
+    <div class="kpi-subtext">Avoided lifecycle emissions vs ICE</div>
+  </div>
+</div>
+
+<!-- Stakeholder Scenario Portals -->
+<h3 style="font-size: 1.35rem; font-weight: 700; margin-bottom: 1rem;">Target Stakeholder Scenarios</h3>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem; margin-bottom: 2.5rem;">
+  
+  <!-- Scenario 1 Card -->
+  <div class="chart-card" style="border-top: 3px solid #3b82f6;">
+    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem;">
+      <span class="persona-tag" style="background: rgba(59, 130, 246, 0.15); color: #3b82f6;">Scenario 1</span>
+      <span style="font-size: 1.5rem;">📊</span>
+    </div>
+    <h4 style="font-size: 1.2rem; font-weight: 700; margin-bottom: 0.35rem;">Emily Johnson</h4>
+    <p style="color: var(--accent-cyan); font-size: 0.85rem; font-weight: 600; margin-bottom: 0.75rem;">
+      EV Market Strategy Director
+    </p>
+    <p style="color: var(--text-muted); font-size: 0.88rem; margin-bottom: 1.25rem; flex: 1;">
+      Evaluates category sales contributions, identifies leading manufacturers, analyzes battery adoption, and optimizes product portfolios across global markets.
+    </p>
+    <a href="{{ url_for('strategy') }}" class="btn-reset" style="background: rgba(59, 130, 246, 0.15); color: #3b82f6; text-align: center; text-decoration: none; border-color: rgba(59, 130, 246, 0.3); font-weight: 600;">
+      Open Strategy Dashboard →
+    </a>
+  </div>
+
+  <!-- Scenario 2 Card -->
+  <div class="chart-card" style="border-top: 3px solid #10b981;">
+    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem;">
+      <span class="persona-tag" style="background: rgba(16, 185, 129, 0.15); color: #10b981;">Scenario 2</span>
+      <span style="font-size: 1.5rem;">📈</span>
+    </div>
+    <h4 style="font-size: 1.2rem; font-weight: 700; margin-bottom: 0.35rem;">David Chen</h4>
+    <p style="color: var(--accent-green); font-size: 0.85rem; font-weight: 600; margin-bottom: 0.75rem;">
+      Automotive Business Intelligence Manager
+    </p>
+    <p style="color: var(--text-muted); font-size: 0.88rem; margin-bottom: 1.25rem; flex: 1;">
+      Monitors manufacturer market share, evaluates geographical production concentrations, benchmarks pricing vs range, and provides data-driven entry recommendations.
+    </p>
+    <a href="{{ url_for('bi') }}" class="btn-reset" style="background: rgba(16, 185, 129, 0.15); color: #10b981; text-align: center; text-decoration: none; border-color: rgba(16, 185, 129, 0.3); font-weight: 600;">
+      Open BI Dashboard →
+    </a>
+  </div>
+
+  <!-- Scenario 3 Card -->
+  <div class="chart-card" style="border-top: 3px solid #8b5cf6;">
+    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem;">
+      <span class="persona-tag" style="background: rgba(139, 92, 246, 0.15); color: #8b5cf6;">Scenario 3</span>
+      <span style="font-size: 1.5rem;">🔬</span>
+    </div>
+    <h4 style="font-size: 1.2rem; font-weight: 700; margin-bottom: 0.35rem;">Dr. Sarah Williams</h4>
+    <p style="color: var(--accent-purple); font-size: 0.85rem; font-weight: 600; margin-bottom: 0.75rem;">
+      Sustainable Mobility Research Analyst
+    </p>
+    <p style="color: var(--text-muted); font-size: 0.88rem; margin-bottom: 1.25rem; flex: 1;">
+      Investigates battery chemistry efficiency (LFP vs NMC vs Solid-State), driving range gains, manufacturing decarbonization, and long-term clean transit policies.
+    </p>
+    <a href="{{ url_for('research') }}" class="btn-reset" style="background: rgba(139, 92, 246, 0.15); color: #8b5cf6; text-align: center; text-decoration: none; border-color: rgba(139, 92, 246, 0.3); font-weight: 600;">
+      Open Research Dashboard →
+    </a>
+  </div>
+
+</div>
+
+<!-- Project Epics & Architecture Summary -->
+<div class="chart-grid">
+  <div class="chart-card col-8">
+    <div class="chart-header">
+      <h3><span>🏆</span> Project Implementation Roadmap (8 Epics / 14 Tasks)</h3>
+      <span class="chart-badge" style="background: rgba(16, 185, 129, 0.2); color: #10b981;">100% Completed</span>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; font-size: 0.88rem;">
+      <div style="background: rgba(255,255,255,0.03); padding: 0.85rem; border-radius: var(--radius-sm); border-left: 3px solid #10b981;">
+        <strong>Epic 1: Data Collection & Extraction</strong>
+        <p style="color: var(--text-muted); font-size: 0.8rem; margin-top: 0.25rem;">Multi-source EV registry, SQL schema & staging tables.</p>
+      </div>
+      <div style="background: rgba(255,255,255,0.03); padding: 0.85rem; border-radius: var(--radius-sm); border-left: 3px solid #10b981;">
+        <strong>Epic 2: Data Preparation</strong>
+        <p style="color: var(--text-muted); font-size: 0.8rem; margin-top: 0.25rem;">Imputation, normalization & feature engineering (Efficiency, CSI).</p>
+      </div>
+      <div style="background: rgba(255,255,255,0.03); padding: 0.85rem; border-radius: var(--radius-sm); border-left: 3px solid #10b981;">
+        <strong>Epic 3: Data Visualizations</strong>
+        <p style="color: var(--text-muted); font-size: 0.8rem; margin-top: 0.25rem;">9 Tableau analytical worksheets (Sales, Chemistries, Range, Maps).</p>
+      </div>
+      <div style="background: rgba(255,255,255,0.03); padding: 0.85rem; border-radius: var(--radius-sm); border-left: 3px solid #10b981;">
+        <strong>Epic 4: Dashboards Development</strong>
+        <p style="color: var(--text-muted); font-size: 0.8rem; margin-top: 0.25rem;">3 interactive persona dashboards with dynamic filters & KPI cards.</p>
+      </div>
+      <div style="background: rgba(255,255,255,0.03); padding: 0.85rem; border-radius: var(--radius-sm); border-left: 3px solid #10b981;">
+        <strong>Epic 5: Tableau Story</strong>
+        <p style="color: var(--text-muted); font-size: 0.8rem; margin-top: 0.25rem;">5-scene narrative journey from market surge to 2030 roadmap.</p>
+      </div>
+      <div style="background: rgba(255,255,255,0.03); padding: 0.85rem; border-radius: var(--radius-sm); border-left: 3px solid #10b981;">
+        <strong>Epic 6: Performance Testing</strong>
+        <p style="color: var(--text-muted); font-size: 0.8rem; margin-top: 0.25rem;">Automated query latency, rendering SLAs & LOD optimization.</p>
+      </div>
+      <div style="background: rgba(255,255,255,0.03); padding: 0.85rem; border-radius: var(--radius-sm); border-left: 3px solid #10b981;">
+        <strong>Epic 7: Web Integration</strong>
+        <p style="color: var(--text-muted); font-size: 0.8rem; margin-top: 0.25rem;">Full-stack responsive Flask portal & Chart.js live analytics.</p>
+      </div>
+      <div style="background: rgba(255,255,255,0.03); padding: 0.85rem; border-radius: var(--radius-sm); border-left: 3px solid #10b981;">
+        <strong>Epic 8: Project Demonstration & Docs</strong>
+        <p style="color: var(--text-muted); font-size: 0.8rem; margin-top: 0.25rem;">Technical project report, GitHub repo & video demonstration guide.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="chart-card col-4">
+    <div class="chart-header">
+      <h3><span>⚡</span> Core Technical Architecture</h3>
+    </div>
+    <ul style="list-style: none; font-size: 0.88rem; color: var(--text-muted); display: flex; flex-direction: column; gap: 0.85rem;">
+      <li>🔹 <strong>BI Software:</strong> Tableau Desktop / Tableau Public 2024</li>
+      <li>🔹 <strong>Backend Server:</strong> Python 3.14 + Flask 3.1</li>
+      <li>🔹 <strong>Data Engine:</strong> Pandas + NumPy Vectorized Processing</li>
+      <li>🔹 <strong>Database Schema:</strong> Star Schema (Dim / Fact relational)</li>
+      <li>🔹 <strong>Frontend:</strong> Modern HTML5, Responsive CSS3 & Chart.js</li>
+      <li>🔹 <strong>Artifacts:</strong> <code>.twb</code>, <code>.twbx</code>, <code>.csv</code>, <code>.sql</code>, <code>.json</code></li>
+    </ul>
+  </div>
+</div>
+{% endblock %}
