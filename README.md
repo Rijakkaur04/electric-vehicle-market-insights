@@ -138,31 +138,28 @@ Automated benchmarks were executed via `performance_testing/benchmark_tests.py`:
 
 ---
 
-## 🚀 Quick Start Guide
+## 🚀 Multi-System & Cloud Deployment
 
-### 1. Prerequisites
-* Python 3.10+ installed
-* Modern Web Browser (Chrome, Edge, Firefox)
-* Optional: Tableau Desktop or Tableau Public (to open `.twbx` or `.twb` directly)
+### 1. One-Click Free Cloud Deployment (Render.com)
+This repository is pre-configured with `render.yaml`, `Procfile`, and `wsgi.py` for instant free deployment:
+1. Go to [render.com](https://render.com) and click **New > Web Service**.
+2. Connect your repository `Rijakkaur04/electric-vehicle-market-insights`.
+3. Select the **Free** plan and click **Create Web Service**.
+4. Your live app URL (e.g. `https://ev-market-insights.onrender.com`) will be active in ~60 seconds to use as your **Demo Link**!
 
-### 2. Launching the Web Portal
-Double-click `run_app.bat` on Windows, or execute via terminal:
-
+### 2. Multi-Platform Docker Execution
+Run with zero setup on any machine (Linux, macOS, Windows) using Docker:
 ```bash
-# Navigate to web application directory
-cd web_app
-
-# Install dependencies (Flask, pandas, numpy)
-pip install -r requirements.txt
-
-# Start the Flask web server
-python app.py
+docker compose up -d
 ```
+Access at `http://localhost:5000`.
 
-Open your browser and navigate to:
-```
-http://127.0.0.1:5000
-```
+### 3. Local Execution Across Systems
+* **Windows:** Double-click [`run_app.bat`](run_app.bat) or run `python wsgi.py`.
+* **macOS / Linux:** Run `pip install -r requirements.txt && python3 wsgi.py`.
+* **Local Network Access:** Anyone on the same Wi-Fi can view the dashboard by opening `http://<your-local-ip>:5000`.
+
+*See the detailed [Multi-System Deployment & Video Demo Guide](docs/Deployment_and_Demo_Guide.md) for step-by-step instructions and the 2-minute video presentation script.*
 
 ### 3. Opening in Tableau
 Open [`tableau/Electric_Vehicle_Market_Performance.twbx`](tableau/Electric_Vehicle_Market_Performance.twbx) directly in Tableau Desktop or Tableau Public.

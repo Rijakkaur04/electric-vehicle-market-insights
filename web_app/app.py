@@ -267,6 +267,7 @@ def download_twbx():
     return send_file(TWBX_PATH, as_attachment=True, download_name="Electric_Vehicle_Market_Performance.twbx")
 
 if __name__ == "__main__":
-    print("Starting Electric Vehicle Market Performance Web Application on http://127.0.0.1:5000 ...")
-    app.run(host="0.0.0.0", port=5000, debug=False)
+    port = int(os.environ.get("PORT", 5000))
+    print(f"Starting Electric Vehicle Market Performance Web Application on port {port}...")
+    app.run(host="0.0.0.0", port=port, debug=False)
 
