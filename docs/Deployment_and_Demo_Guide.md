@@ -36,7 +36,10 @@ This repository includes pre-configured [`render.yaml`](../render.yaml), [`Procf
    * Render will build and deploy the container in ~60-90 seconds.
    * Your live demo link will appear at the top (e.g., `https://ev-market-insights.onrender.com`).
 6. **Submit on MySkillWallet:**
-   * Paste `https://ev-market-insights.onrender.com` into **"Add Demo Link"** on your [MySkillWallet Dashboard](https://myskillwallet.ai)!
+   * Your active live URL is:  
+     👉 **[https://electric-vehicle-market-insights-2.onrender.com](https://electric-vehicle-market-insights-2.onrender.com)**  
+     *(Data Explorer: [https://electric-vehicle-market-insights-2.onrender.com/explorer](https://electric-vehicle-market-insights-2.onrender.com/explorer))*
+   * Paste `https://electric-vehicle-market-insights-2.onrender.com` into **"Add Demo Link"** on your [MySkillWallet Dashboard](https://myskillwallet.ai)!
 
 ---
 
@@ -119,7 +122,5 @@ If you prefer submitting a Loom or YouTube video demo as your Demo Link, record 
 ## 📋 Summary: Links to Submit on MySkillWallet
 
 1. **GitHub Link:** `https://github.com/Rijakkaur04/electric-vehicle-market-insights`
-2. **Demo Link:**
-   * Your Render cloud URL: `https://ev-market-insights.onrender.com`
-   * OR your Loom / YouTube recording URL.
+2. **Demo Link:** `https://electric-vehicle-market-insights-2.onrender.com`
 

@@ -2,6 +2,7 @@
 ### *Enterprise Data Analytics, Tableau Dashboarding & Web Integration Platform*
 
 [![Tableau](https://img.shields.io/badge/Tableau-Desktop%20%7C%20Public-E97627?style=for-the-badge&logo=Tableau&logoColor=white)](https://www.tableau.com/)
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-Online%20(Render)-00c7b7?style=for-the-badge&logo=render&logoColor=white)](https://electric-vehicle-market-insights-2.onrender.com)
 [![Python](https://img.shields.io/badge/Python-3.10%20%7C%203.14-3776AB?style=for-the-badge&logo=Python&logoColor=white)](https://www.python.org/)
 [![Flask](https://img.shields.io/badge/Flask-3.1-000000?style=for-the-badge&logo=Flask&logoColor=white)](https://flask.palletsprojects.com/)
 [![Pandas](https://img.shields.io/badge/Pandas-2.0%2B-150458?style=for-the-badge&logo=pandas&logoColor=white)](https://pandas.pydata.org/)
@@ -11,6 +12,8 @@
 ---
 
 ## 📌 Submission Overview & Quick Links
+* **Live Cloud Demo:** [https://electric-vehicle-market-insights-2.onrender.com](https://electric-vehicle-market-insights-2.onrender.com)
+* **Interactive Data Explorer:** [https://electric-vehicle-market-insights-2.onrender.com/explorer](https://electric-vehicle-market-insights-2.onrender.com/explorer)
 * **GitHub Repository:** [https://github.com/Rijakkaur04/electric-vehicle-market-insights](https://github.com/Rijakkaur04/electric-vehicle-market-insights)
 * **Capstone Platform:** [MySkillWallet.ai](https://myskillwallet.ai) (Powered by SmartBridge / SmartInternz)
 * **Program:** Data Analytics with Tableau
@@ -182,10 +185,9 @@ To submit your project to your mentor on [MySkillWallet](https://myskillwallet.a
    * Click **"Add Github Link"** on your MySkillWallet project page and paste the link.
 
 2. **Demo Link:**
-   * Option A (Tableau Public): Open `Electric_Vehicle_Market_Performance.twbx` in Tableau Public, click **Server > Tableau Public > Save to Tableau Public**, and copy the published dashboard URL.
-   * Option B (Web App Hosting): Deploy this Flask web app to Render, Railway, or PythonAnywhere (free tier) and copy the URL (e.g. `https://ev-market-insights.onrender.com`).
-   * Option C (Local Demo / Loom Video): Record a 2-3 minute video demonstration walking through the dashboards and paste the Loom / YouTube unlisted link.
-   * Click **"Add Demo Link"** on your MySkillWallet project page and paste the URL.
+   * **Live Cloud Deployment (Active):** [https://electric-vehicle-market-insights-2.onrender.com](https://electric-vehicle-market-insights-2.onrender.com)
+   * **Direct Data Explorer:** [https://electric-vehicle-market-insights-2.onrender.com/explorer](https://electric-vehicle-market-insights-2.onrender.com/explorer)
+   * *Copy and paste either link directly into **"Add Demo Link"** on your MySkillWallet project page.*
 
 ---
 
